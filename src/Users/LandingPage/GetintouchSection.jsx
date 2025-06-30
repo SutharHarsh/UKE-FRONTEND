@@ -63,7 +63,7 @@ const GetintouchSection = () => {
     <div className="bg-black p-8">
       <div className="max-w-7xl mx-auto">
         <img
-          className="absolute w-80 h-118 left-[50%] mt-200 -translate-x-1/2 lg:left-270 lg:mt-7 md:left-[50%] md:-translate-x-1/2 md:mt-152 rounded-xl shadow-2xl hover:shadow-none transition-shadow duration-200 ease-in-out cursor-pointer z-50 md:w-90 md:h-auto"
+          className="absolute w-70 h-118 left-[50%] mt-200 -translate-x-1/2 lg:left-270 lg:mt-7 md:left-[50%] md:-translate-x-1/2 md:mt-152 rounded-xl shadow-2xl hover:shadow-none transition-shadow duration-200 ease-in-out cursor-pointer z-50 md:w-90 md:h-auto"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToGJCbEKm6Dsj99yCQpINVH1UcHMlObtT9rQ&s"
           alt=""
         />
