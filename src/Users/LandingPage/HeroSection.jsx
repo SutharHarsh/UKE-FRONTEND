@@ -1,19 +1,19 @@
 import React from "react";
 // import { useSelector } from "react-redux";
 import { Link} from "react-router-dom";
+import landingpage_image from "../../assets/landingpage_image.png";
 
 
 const HeroSection = () => {
   // const user = useSelector((store)=>store.store.user)
   return (
     <section
-      className="relative bg-black text-white h-[90vh] flex items-center justify-center bg-cover bg-center"
+      className="relative bg-black text-white top-0 h-[90vh] flex items-center justify-center bg-cover bg-center"
       style={{
-        backgroundImage:
-          "url('https://cdn.pixabay.com/photo/2016/03/27/22/16/security-camera-1284038_1280.jpg')", 
+        backgroundImage: `url(${landingpage_image})`, 
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="absolute inset-0 bg-black opacity-40"></div>
 
       <div className="relative z-10 text-center px-4">
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
