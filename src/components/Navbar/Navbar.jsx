@@ -35,9 +35,6 @@ const Navbar = () => {
         <NavLink to="/home" className={navLinkClasses}>
           Home
         </NavLink>
-        <NavLink to="/products" className={navLinkClasses}>
-          Products
-        </NavLink>
         <NavLink to="/about" className={navLinkClasses}>
           About
         </NavLink>
@@ -68,15 +65,12 @@ const Navbar = () => {
           </NavLink>
         ) : (
           <>
-            <NavLink
-              to="/profile"
-              className={navLinkClasses}
-            >
+            <NavLink to="/profile" className={navLinkClasses}>
               Profile
             </NavLink>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-1.5 rounded-full hover:bg-red-600 transition"
+              className="bg-red-500 text-white px-4 py-1.5 rounded-full hover:bg-red-600 transition cursor-pointer"
             >
               Logout
             </button>
@@ -98,8 +92,8 @@ const Navbar = () => {
         >
           <FiShoppingCart className="text-xl" />
         </NavLink>
-        
-        <button 
+
+        <button
           onClick={toggleMenu}
           className="p-2 rounded-full hover:bg-gray-50 transition"
         >
@@ -113,8 +107,8 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" 
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={toggleMenu}
         />
       )}
@@ -127,10 +121,8 @@ const Navbar = () => {
       >
         {/* Mobile Menu Header */}
         <div className="flex items-center justify-between p-4 border-b">
-          <div className="text-xl font-sans font-bold text-green-600">
-            UKE
-          </div>
-          <button 
+          <div className="text-xl font-sans font-bold text-green-600">UKE</div>
+          <button
             onClick={toggleMenu}
             className="p-2 rounded-full hover:bg-gray-50 transition"
           >
@@ -140,9 +132,9 @@ const Navbar = () => {
 
         {/* Mobile Menu Links */}
         <div className="flex flex-col p-4 space-y-1">
-          <NavLink 
-            to="/home" 
-            onClick={toggleMenu} 
+          <NavLink
+            to="/home"
+            onClick={toggleMenu}
             className={({ isActive }) =>
               `px-4 py-3 rounded-lg text-base ${
                 isActive
@@ -153,22 +145,9 @@ const Navbar = () => {
           >
             Home
           </NavLink>
-          <NavLink 
-            to="/products" 
-            onClick={toggleMenu} 
-            className={({ isActive }) =>
-              `px-4 py-3 rounded-lg text-base ${
-                isActive
-                  ? "text-green-600 font-semibold bg-green-50"
-                  : "text-black hover:text-green-600 hover:bg-gray-50 transition"
-              }`
-            }
-          >
-            Products
-          </NavLink>
-          <NavLink 
-            to="/about" 
-            onClick={toggleMenu} 
+          <NavLink
+            to="/about"
+            onClick={toggleMenu}
             className={({ isActive }) =>
               `px-4 py-3 rounded-lg text-base ${
                 isActive
@@ -179,9 +158,9 @@ const Navbar = () => {
           >
             About
           </NavLink>
-          <NavLink 
-            to="/contact" 
-            onClick={toggleMenu} 
+          <NavLink
+            to="/contact"
+            onClick={toggleMenu}
             className={({ isActive }) =>
               `px-4 py-3 rounded-lg text-base ${
                 isActive

@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const init = async () => {
+      // localStorage.clear();
       const token = getToken();
       dispatch(setLoading());
       if (token) {

@@ -1,12 +1,16 @@
 import { ShoppingCart } from "lucide-react";
 
 const HomepageProductCard = ({ product }) => {
-  console.log(product)
+  console.log(product);
   return (
-    <div className="w-80 rounded-2xl p-6 shadow-2xl border border-gray-700">
+    <div className="w-70 md:w-80 rounded-2xl p-6 shadow-2xl border border-gray-700 bg-black">
       {/* Product Image */}
-      <div className="bg-gray-100 rounded-xl p-6 mb-6 flex items-center justify-center h-48">
-        <img src={"http://localhost:1337" + product?.images[0]?.url} alt="product_image" />
+      <div className="bg-gray-100 rounded-xl p-4 mb-6 flex items-center justify-center h-48 overflow-hidden">
+        <img
+          src={"http://localhost:1337" + product?.images[0]?.url}
+          alt="product_image"
+          className="w-full h-full object-contain max-w-full max-h-full"
+        />
       </div>
 
       {/* Product Details */}
