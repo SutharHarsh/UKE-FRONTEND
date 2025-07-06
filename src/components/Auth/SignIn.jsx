@@ -41,7 +41,7 @@ const SignIn = () => {
     dispatch(setLoading());
 
     try {
-      const res = await fetch("http://localhost:1337/api/auth/local", {
+      const res = await fetch("https://uke-strapi-backend.onrender.com/api/auth/local", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

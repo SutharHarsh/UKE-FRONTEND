@@ -20,17 +20,20 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:1337/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: input.name,
-          email: input.email,
-          password: input.password,
-          confirmed: true,
-          role: 2,
-        }),
-      });
+      const res = await fetch(
+        "https://uke-strapi-backend.onrender.com/api/users",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: input.name,
+            email: input.email,
+            password: input.password,
+            confirmed: true,
+            role: 2,
+          }),
+        }
+      );
 
       if (!res.ok) {
         const error = await res.json();
@@ -75,14 +78,21 @@ const SignUp = () => {
         <div className="flex-1 lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-12 bg-gradient-to-br from-gray-900 to-black">
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-              <p className="text-gray-400">Fill the form below to get started</p>
+              <h2 className="text-3xl font-bold text-white mb-2">
+                Create Account
+              </h2>
+              <p className="text-gray-400">
+                Fill the form below to get started
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Username */}
               <div className="space-y-2">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-300"
+                >
                   Username
                 </label>
                 <div className="relative">
@@ -104,7 +114,10 @@ const SignUp = () => {
 
               {/* Email */}
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-300"
+                >
                   Email Address
                 </label>
                 <div className="relative">
@@ -126,7 +139,10 @@ const SignUp = () => {
 
               {/* Password */}
               <div className="space-y-2">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-300"
+                >
                   Password
                 </label>
                 <div className="relative">

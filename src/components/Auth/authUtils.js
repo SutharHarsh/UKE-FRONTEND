@@ -4,7 +4,7 @@ export const removeToken = () => localStorage.removeItem('token');
 
 export const fetchUser = async (token) => {
   try {
-    const res = await fetch("http://localhost:1337/api/users/me", {
+    const res = await fetch("https://uke-strapi-backend.onrender.com/api/users/me", {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) throw new Error("Invalid token");
