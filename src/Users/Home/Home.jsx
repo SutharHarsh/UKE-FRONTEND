@@ -3,6 +3,7 @@ import HomepageProductCard from "../../components/ProductCard/HomepageProductCar
 import { useProducts } from "../../Hooks/Product";
 import { SlidersHorizontal, X, Filter } from "lucide-react";
 import PriceRangeSlider from "./PriceRangeSlider";
+import HeroSection from "../../assets/HeroSection.png";
 
 const Home = () => {
   const [selectedCamera, setSelectedCamera] = useState("Rounded CCTV Camera");
@@ -208,7 +209,7 @@ const Home = () => {
         </h1>
         <img
           className="h-[150px] md:h-[200px] lg:h-[300px]"
-          src="../../../src/assets/HeroSection.png"
+          src={HeroSection}
           alt="Hero Section"
         />
       </div>
