@@ -27,7 +27,7 @@ export const useProducts = (options = {}) => {
 
       // Build query parameters
       const params = new URLSearchParams();
-      
+
       if (page) params.append('page', page);
       if (limit) params.append('limit', limit);
       if (category) params.append('category', category);
@@ -41,7 +41,7 @@ export const useProducts = (options = {}) => {
       const queryString = params.toString();
       console.log(queryString);
       // const url = `http://localhost:1337/api/products?limit=10&sortBy=name&sortOrder=asc`;
-      const url = `http://localhost:1337/api/products?populate=*`;
+      const url = `https://uke-strapi-backend.onrender.com/api/products?populate=*`;
 
       const response = await fetch(url, {
         method: 'GET',
@@ -57,7 +57,7 @@ export const useProducts = (options = {}) => {
       }
 
       const data = await response.json();
-      
+
       // Handle different API response structures
       if (Array.isArray(data)) {
         setProducts(data);
@@ -230,8 +230,8 @@ function FilteredProducts() {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      
-      <Pagination 
+
+      <Pagination
         currentPage={filters.page}
         totalItems={totalCount}
         itemsPerPage={filters.limit}
@@ -267,9 +267,9 @@ function ProductsWithRefresh() {
       <button onClick={refetch} disabled={loading}>
         {loading ? 'Loading...' : 'Fetch Products'}
       </button>
-      
+
       {error && <div>Error: {error}</div>}
-      
+
       <div className="grid grid-cols-3 gap-4">
         {products.map(product => (
           <ProductCard key={product.id} product={product} />
