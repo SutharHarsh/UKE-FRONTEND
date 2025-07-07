@@ -4,6 +4,7 @@ import { useProducts } from "../../Hooks/Product";
 import { SlidersHorizontal, X, Filter } from "lucide-react";
 import PriceRangeSlider from "./PriceRangeSlider";
 import HeroSection from "../../assets/HeroSection.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [selectedCamera, setSelectedCamera] = useState("Rounded CCTV Camera");
@@ -254,7 +255,9 @@ const Home = () => {
                 key={product.id}
                 className="w-full max-w-sm flex justify-center"
               >
-                <HomepageProductCard product={product} />
+                <Link to={"/productpage/" + product?.documentId}>
+                  <HomepageProductCard product={product} />
+                </Link>
               </div>
             ))}
           </div>

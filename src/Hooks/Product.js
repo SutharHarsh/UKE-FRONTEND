@@ -113,7 +113,7 @@ export const useProduct = (productId) => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`https://uke-strapi-backend.onrender.com/api/products/${productId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

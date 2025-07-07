@@ -17,6 +17,7 @@ import Cart from "./Users/Cart/Cart";
 import MainLayout from "./components/Layout/MainLayout";
 import AboutUs from "./Users/AboutUS/AboutUs";
 import ContactUs from "./Users/ContactUs/ContactUs";
+import ProductPage from "./Users/ProductPage/ProductPage";
 
 function App() {
   return (
@@ -34,9 +35,10 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/productpage/:id" element={<ProductPage />} />
 
               <Route element={<PrivateRoute />}>
-                <Route path="/home" element={<Home />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/profile" element={<Profile />} />
               </Route>
