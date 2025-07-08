@@ -4,6 +4,7 @@ import {
   Plus,
   Minus,
   ShoppingCart,
+  CreditCard,
   Home,
   ChevronRight,
 } from "lucide-react";
@@ -15,10 +16,10 @@ const ProductData = ({ productId }) => {
   const [activeTab, setActiveTab] = useState("information");
 
   const productData = useProduct(productId);
-  const product = productData?.product?.data
+  const product = productData?.product?.data;
 
   const images = [
-    "https://uke-strapi-backend.onrender.com/api/upload/files/" + {productId},
+    "https://uke-strapi-backend.onrender.com/api/upload/files/" + { productId },
     "/api/placeholder/400/400",
     "/api/placeholder/400/400",
     "/api/placeholder/400/400",
@@ -53,11 +54,11 @@ const ProductData = ({ productId }) => {
           {/* Product Images */}
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Thumbnail Images */}
-            <div className="flex flex-row md:flex-col gap-2 space-y-2">
+            <div className="flex justify-center flex-row md:flex-col gap-2 space-y-2">
               {images.map((img, index) => (
                 <div
                   key={index}
-                  className={`w-20 h-20 rounded-lg border-2 cursor-pointer overflow-hidden ${
+                  className={`w-16 h-16 rounded-lg border-2 cursor-pointer overflow-hidden ${
                     selectedImage === index
                       ? "border-green-500"
                       : "border-gray-600"
@@ -112,14 +113,14 @@ const ProductData = ({ productId }) => {
 
             {/* Product Options */}
             <div className="space-y-4">
-              <div className="flex sm:flex-row flex-col gap-3 items-center justify-between">
+              <div className="flex sm:flex-row flex-col gap-3 items-left justify-between">
                 <span className="text-sm">Sub-Categories</span>
                 <select className="bg-gray-800 border border-gray-600 rounded px-3 py-2 text-sm cursor-pointer">
                   <option>{product?.subCategory}</option>
                 </select>
               </div>
 
-              <div className="flex sm:flex-row flex-col gap-3 items-center justify-between">
+              <div className="flex sm:flex-row flex-col gap-3 items-left justify-between">
                 <span className="text-sm">Color</span>
                 <select className="bg-gray-800 border border-gray-600 rounded px-3 py-2 text-sm cursor-pointer">
                   <option>{product?.color}</option>
@@ -127,9 +128,7 @@ const ProductData = ({ productId }) => {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-sm">
-                  Availability: {product?.stocks}
-                </span>
+                <span className="text-sm">Availability: {product?.stocks}</span>
                 {product?.bestseller && (
                   <span className="text-xs bg-green-600 px-2 py-1 rounded">
                     Best Seller Product
@@ -139,8 +138,8 @@ const ProductData = ({ productId }) => {
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center bg-gray-800 rounded">
+            <div className="flex items-left flex-col gap-6 sm:flex-row space-x-4">
+              <div className="flex w-30 sm:w-auto items-center bg-gray-800 rounded">
                 <button
                   onClick={() => handleQuantityChange("decrement")}
                   className="p-2 text-gray-400 hover:text-white cursor-pointer"
@@ -157,14 +156,22 @@ const ProductData = ({ productId }) => {
                   <Plus className="w-4 h-4" />
                 </button>
               </div>
-
-              <button
-                onClick={handleAddToCart}
-                className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 px-6 py-3 rounded font-medium transition-colors cursor-pointer"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                <span>Add to Cart</span>
-              </button>
+              <div className="flex flex-col gap-4 items-left sm:flex-row sm:gap-3">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex items-center justify-center space-x-2  bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-medium transition-colors cursor-pointer"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>Add to Cart</span>
+                </button>
+                <button
+                  // onClick={handleBuyNow}
+                  className="flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 px-6 py-3 rounded font-medium transition-colors cursor-pointer"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  <span>Buy Now</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
