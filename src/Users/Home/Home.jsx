@@ -20,7 +20,28 @@ const Home = () => {
     );
   };
 
-  const { products, loading, error } = useProducts();
+  // const { products, loading, error } = useProducts();
+  const products = [
+  {
+    id: 1,
+    title: "Wireless Bluetooth Headphones",
+    description: "Good Headphones",
+    price: 2499,
+    category: "Electronics",
+    inStock: true,
+    rating: 4.5
+  },
+  {
+    id: 2,
+    title: "Organic Cotton T-Shirt",
+    description: "Good Headphones",
+    price: 799,
+    category: "Clothing",
+    inStock: false,
+    rating: 4.2
+  }
+];
+
 
   const FilterSection = () => (
     <div className="space-y-6 md:space-y-8">
@@ -255,7 +276,7 @@ const Home = () => {
                 key={product.id}
                 className="w-full max-w-sm flex justify-center"
               >
-                <Link to={"/productpage/" + product?.documentId}>
+                <Link to={"/productpage/" + product?.id}>
                   <HomepageProductCard product={product} />
                 </Link>
               </div>

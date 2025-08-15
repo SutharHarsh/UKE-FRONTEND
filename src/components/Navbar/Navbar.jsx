@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useToggle from "../../Hooks/useToggle";
 import { clearUserInfo } from "../../store/userSlice";
+import logo from "../../assets/UKE-Logo.png"
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -11,23 +12,18 @@ const Navbar = () => {
   const user = useSelector((state) => state.user.user);
   const { isOpen: menuOpen, toggle: toggleMenu } = useToggle();
 
-  const handleLogout = () => {
-    dispatch(clearUserInfo());
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   const navLinkClasses = ({ isActive }) =>
     isActive
       ? "text-green-600 font-semibold"
       : "text-black hover:text-green-600 transition";
 
   return (
-    <nav className="bg-white px-3 sm:px-6 py-3 rounded-full shadow-md flex justify-between items-center mx-2 sm:mx-4 mt-4 relative z-50">
+    <nav className="bg-white px-3 sm:px-6 py-2 rounded-full shadow-md flex justify-between items-center mx-2 sm:mx-4 mt-4 relative z-50">
       {/* Logo */}
-      <div className="text-2xl sm:text-3xl font-sans font-bold text-green-600">
-        <Link to={"/"}>UKE</Link>
+      <div>
+        <Link to={"/"}>
+          <img src={logo} alt="logo" className="w-10"/>
+        </Link>
       </div>
 
       {/* Desktop Navigation Links */}
@@ -55,8 +51,11 @@ const Navbar = () => {
           <FiShoppingCart className="text-lg" />
           Cart
         </NavLink>
+        {/* <NavLink to="/profile" className={navLinkClasses}>
+          Profile
+        </NavLink> */}
 
-        {!user ? (
+        {/* {!user ? (
           <NavLink
             to="/signin"
             className="bg-green-600 text-white px-4 py-1.5 rounded-full hover:bg-green-700 transition"
@@ -75,7 +74,7 @@ const Navbar = () => {
               Logout
             </button>
           </>
-        )}
+        )} */}
       </div>
 
       {/* Mobile Cart & Menu */}
@@ -186,9 +185,22 @@ const Navbar = () => {
             <FiShoppingCart className="text-lg" />
             Cart
           </NavLink>
+          {/* <NavLink
+            to="/profile"
+            onClick={toggleMenu}
+            className={({ isActive }) =>
+              `block px-4 py-3 rounded-lg text-base ${
+                isActive
+                  ? "text-green-600 font-semibold bg-green-50"
+                  : "text-black hover:text-green-600 hover:bg-gray-50 transition"
+              }`
+            }
+          >
+            Profile
+          </NavLink> */}
 
           {/* Mobile Menu Actions */}
-          <div className="pt-4 mt-4 border-t space-y-2">
+          {/* <div className="pt-4 mt-4 border-t space-y-2">
             {!user ? (
               <NavLink
                 onClick={toggleMenu}
@@ -223,7 +235,7 @@ const Navbar = () => {
                 </button>
               </>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

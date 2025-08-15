@@ -8,6 +8,8 @@ import {
   FiSmartphone,
 } from "react-icons/fi";
 import { MdFingerprint } from "react-icons/md";
+import AboutUS_Card_Image from "../assets/about_us_card_image.png";
+import Why_Choose_Image from "../assets/Why_Choose_Us_Card_Image.png";
 
 export const features = [
   {
@@ -37,8 +39,7 @@ export const features = [
 ];
 
 export const AboutUs = {
-  image:
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQsOU6cNLeeDjDCEuvBYv02w2NTuQmoGR4qCoq1ka7TBhvK9qgz",
+  image: AboutUS_Card_Image,
   title: "About Us",
   description:
     "At [ Brand Name], we provide cutting-edge CCTV camera solutions designed for real protection—crystal-clear footage, smart features, and around-the-clock reliability. Trusted by homes and businesses worldwide, our systems are easy to install, built to endure, and engineered to keep you in control from anywhere. Because when it comes to your safety, nothing less than complete security will do.",
@@ -51,8 +52,7 @@ export const AboutUs = {
 };
 
 export const WhyUS = {
-  image:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2B5zZJiObZxGqRD3QTlTtY-_OUm5V9lU8rXPMIZeb1-tRdk-H",
+  image: Why_Choose_Image,
   title: "Why Choose Us",
   description: `At [Brand Name], we go beyond just surveillance — we deliver confidence. Our CCTV solutions are built for those who demand reliability, smart control, and unmatched video clarity. Whether you’re securing a home or scaling protection for a business, we make it simple, powerful, and proven. Join thousands who trust us to keep what matters most safe.
   

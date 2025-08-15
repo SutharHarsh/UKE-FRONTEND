@@ -1,13 +1,22 @@
 import { ShoppingCart } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "../../store/productSlice";
 
 const HomepageProductCard = ({ product }) => {
-  console.log(product);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    dispatch(addProductToCart(product));
+    localStorage.setItem(product_detail ,product);
+  };
+
   return (
     <div className="w-70 md:w-80 rounded-2xl p-6 shadow-2xl border border-gray-700 bg-black">
       {/* Product Image */}
       <div className="bg-gray-100 rounded-xl p-4 mb-6 flex items-center justify-center h-48 overflow-hidden">
         <img
-          src={"https://uke-strapi-backend.onrender.com" + product?.images[0]?.url}
+          // src={"https://uke-strapi-backend.onrender.com" + product?.images[0]?.url}
           alt="product_image"
           className="w-full h-full object-contain max-w-full max-h-full"
         />
@@ -53,7 +62,10 @@ const HomepageProductCard = ({ product }) => {
         </button>
 
         {/* Add to Cart Button */}
-        <button className="flex-1 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer">
+        <button
+          onClick={handleAddToCart}
+          className="flex-1 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+        >
           <ShoppingCart size={16} />
           Add to Cart
         </button>

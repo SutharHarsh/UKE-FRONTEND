@@ -11,30 +11,32 @@ import BestProductSection from "./BestProductSection";
 
 const LandingPage = () => {
   return (
-    <div className="py-20 my-5">
+    <div>
       <HeroSection />
-      <FeatureSection />
-      <BannerCard
-        image={AboutUs.image}
-        title={AboutUs.title}
-        description={AboutUs.description}
-        buttonText={AboutUs.buttonText}
-        stats={[
-          { icon: "👥", value: "1234", label: "Happy Customers" },
-          { icon: "📦", value: "1234", label: "Products Sold" },
-        ]}
-        reverse={false}
-      />
-      <OurServices />
-      <BannerCard
-        image={WhyUS.image}
-        title={WhyUS.title}
-        description={WhyUS.description}
-        reverse={true}
-      />
-      <BestProductSection />
-      <GetintouchSection />
-      <TestimonialSection />
+      <div className="py-20">
+        <FeatureSection />
+        <BannerCard
+          image={AboutUs.image}
+          title={AboutUs.title}
+          description={AboutUs.description}
+          buttonText={AboutUs.buttonText}
+          stats={[
+            { icon: "👥", value: "1234", label: "Happy Customers" },
+            { icon: "📦", value: "1234", label: "Products Sold" },
+          ]}
+          reverse={false}
+        />
+        <OurServices />
+        <BannerCard
+          image={WhyUS.image}
+          title={WhyUS.title}
+          description={WhyUS.description}
+          reverse={true}
+        />
+        <BestProductSection />
+        <GetintouchSection />
+        <TestimonialSection />
+      </div>
     </div>
   );
 };

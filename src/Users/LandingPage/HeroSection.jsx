@@ -8,7 +8,7 @@ const HeroSection = () => {
   // const user = useSelector((store)=>store.store.user)
   return (
     <section
-      className="relative bg-black text-white top-0 h-[90vh] flex items-center justify-center bg-cover bg-center"
+      className="relative bg-black text-white top-0 h-[120vh] flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage: `url(${landingpage_image})`, 
       }}
