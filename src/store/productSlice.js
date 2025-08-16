@@ -3,21 +3,29 @@ import { createSlice } from "@reduxjs/toolkit";
 const loadFromLocalStorage = () => {
   try {
     const data = localStorage.getItem("cart");
-    return data ? JSON.parse(data) : [];
+    return data
+      ? JSON.parse(data)
+      : { productData: [], totalPrice: 0 };  // return object not array
   } catch {
-    return [];
+    return { productData: [], totalPrice: 0 };
   }
 };
 
 const saveToLocalStorage = (state) => {
   try {
-    localStorage.setItem("cart", JSON.stringify(state.productData));
-  } catch {}
+    localStorage.setItem(
+      "cart",
+      JSON.stringify({
+        productData: state.productData,
+        totalPrice: state.totalPrice,
+      })
+    );
+  } catch { }
 };
 
 const initialState = {
-  productData: loadFromLocalStorage(),
-  totalPrice: 0,
+  productData: loadFromLocalStorage().productData || [],
+  totalPrice: loadFromLocalStorage().totalPrice || 0,
 };
 
 const calculateTotal = (items) => {

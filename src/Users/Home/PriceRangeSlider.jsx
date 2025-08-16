@@ -148,7 +148,7 @@ const PriceRangeSlider = () => {
             <div>
               <label className="block text-white text-sm font-medium mb-2">From</label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">£</span>
                 <input
                   type="number"
                   value={minPrice}
@@ -164,7 +164,7 @@ const PriceRangeSlider = () => {
             <div>
               <label className="block text-white text-sm font-medium mb-2">To</label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">£</span>
                 <input
                   type="number"
                   value={maxPrice}

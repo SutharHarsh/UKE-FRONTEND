@@ -8,7 +8,6 @@ const HomepageProductCard = ({ product }) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
     dispatch(addProductToCart(product));
-    localStorage.setItem(product_detail ,product);
   };
 
   return (

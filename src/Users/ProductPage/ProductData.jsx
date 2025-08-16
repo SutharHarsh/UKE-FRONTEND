@@ -108,7 +108,7 @@ const ProductData = ({ productId }) => {
 
             {/* Price */}
             <div className="text-3xl font-bold text-green-400">
-              ${product?.price}
+              £{product?.price}
             </div>
 
             {/* Product Options */}
@@ -259,7 +259,7 @@ const ProductData = ({ productId }) => {
                       Delivery Information
                     </h3>
                     <div className="space-y-3 text-sm text-gray-300">
-                      <p>• Free delivery on orders over $100</p>
+                      <p>• Free delivery on orders over £100</p>
                       <p>• Standard delivery: 3-5 business days</p>
                       <p>• Express delivery: 1-2 business days</p>
                       <p>• Installation service available</p>

@@ -103,17 +103,17 @@ export default function ProductCard({
         <div className="space-y-1">
           <div className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-emerald-600">
-              ${product.price.toFixed(2)}
+              £{product.price.toFixed(2)}
             </span>
             {product.originalPrice && product.originalPrice > product.price && (
               <span className="text-lg text-gray-400 line-through">
-                ${product.originalPrice.toFixed(2)}
+                £{product.originalPrice.toFixed(2)}
               </span>
             )}
           </div>
           {product.discount && (
             <p className="text-sm text-emerald-600 font-medium">
-              You save ${(product.originalPrice - product.price).toFixed(2)}
+              You save £{(product.originalPrice - product.price).toFixed(2)}
             </p>
           )}
         </div>

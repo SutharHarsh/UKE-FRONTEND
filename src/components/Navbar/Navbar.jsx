@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useToggle from "../../Hooks/useToggle";
 import { clearUserInfo } from "../../store/userSlice";
-import logo from "../../assets/UKE-Logo.png"
+import logo from "../../assets/UKE-Logo.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Navbar = () => {
       {/* Logo */}
       <div>
         <Link to={"/"}>
-          <img src={logo} alt="logo" className="w-10"/>
+          <img src={logo} alt="logo" className="w-10" />
         </Link>
       </div>
 

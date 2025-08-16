@@ -34,7 +34,7 @@ const ProductCard = () => {
             <div>
               <span className="text-sm font-medium text-gray-700">Price: </span>
               <span className="text-sm text-red-600 font-semibold">
-                $147.51
+                £147.51
               </span>
             </div>
 

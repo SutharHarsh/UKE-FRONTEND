@@ -22,26 +22,27 @@ const Home = () => {
 
   // const { products, loading, error } = useProducts();
   const products = [
-  {
-    id: 1,
-    title: "Wireless Bluetooth Headphones",
-    description: "Good Headphones",
-    price: 2499,
-    category: "Electronics",
-    inStock: true,
-    rating: 4.5
-  },
-  {
-    id: 2,
-    title: "Organic Cotton T-Shirt",
-    description: "Good Headphones",
-    price: 799,
-    category: "Clothing",
-    inStock: false,
-    rating: 4.2
-  }
-];
-
+    {
+      id: 1,
+      img: "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      title: "Wireless Bluetooth Headphones",
+      description: "Good Headphones",
+      price: 2499,
+      category: "Electronics",
+      inStock: true,
+      rating: 4.5,
+    },
+    {
+      id: 2,
+      img: "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      title: "Organic Cotton T-Shirt",
+      description: "Good Headphones",
+      price: 799,
+      category: "Clothing",
+      inStock: false,
+      rating: 4.2,
+    },
+  ];
 
   const FilterSection = () => (
     <div className="space-y-6 md:space-y-8">

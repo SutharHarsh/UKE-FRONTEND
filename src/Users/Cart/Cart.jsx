@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
 import CartProductCard from "../../components/Cart/CartProductCard";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { addCartData } from "../../store/deliverySlice";
 
 const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
-  const [discount, setDiscount] = useState(57.51);
+
+  const dispatch = useDispatch();
 
   // Get data from Redux (already persisted from localStorage)
   const { productData, totalPrice } = useSelector((store) => store.product);
+  const { discount } = useSelector((store) => store.delivery);
 
   const shipping = 0;
   const total = totalPrice - discount + shipping;
@@ -22,14 +25,37 @@ const Cart = () => {
 
   const handleApplyPromo = () => {
     const upperCode = promoCode.trim().toUpperCase();
-    if (promoCodes[upperCode]) {
-      setDiscount(promoCodes[upperCode]);
-      setError("");
-    } else {
-      setDiscount(0);
-      setError("Invalid promo code");
-    }
+    const discountValue = promoCodes[upperCode] || 0;
+
+    dispatch(
+      addCartData({
+        subTotalPrice: totalPrice,
+        discount: discountValue,
+        totalPrice: totalPrice - discountValue + shipping,
+      })
+    );
   };
+
+  // const handleApplyPromo = () => {
+  //   const upperCode = promoCode.trim().toUpperCase();
+  //   if (promoCodes[upperCode]) {
+  //     setDiscount(promoCodes[upperCode]);
+  //     console.log(discount);
+  //   } else {
+  //     setDiscount(0);
+  //     console.log(yoo + discount);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   dispatch(
+  //     addCartData({
+  //       subTotalPrice: totalPrice,
+  //       discount: discount,
+  //       totalPrice: total,
+  //     })
+  //   );
+  // }, [totalPrice, discount, total, dispatch]);
 
   return (
     <div className="min-h-screen bg-black my-20 text-white">
@@ -98,7 +124,7 @@ const Cart = () => {
             <div className="space-y-2 md:space-y-3">
               <div className="flex justify-between text-sm md:text-base">
                 <span className="text-gray-400">Cart Sub Total:</span>
-                <span className="text-green-400">${totalPrice.toFixed(2)}</span>
+                <span className="text-green-400">£{totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm md:text-base">
                 <span className="text-gray-400">Shipping:</span>
@@ -106,12 +132,12 @@ const Cart = () => {
               </div>
               <div className="flex justify-between text-sm md:text-base">
                 <span className="text-gray-400">Discount:</span>
-                <span className="text-green-400">-${discount.toFixed(2)}</span>
+                <span className="text-green-400">-£{discount.toFixed(2)}</span>
               </div>
               <hr className="border-gray-600" />
               <div className="flex justify-between font-medium text-sm md:text-base">
                 <span className="text-white">Cart Total:</span>
-                <span className="text-green-400">${total.toFixed(2)}</span>
+                <span className="text-green-400">£{total.toFixed(2)}</span>
               </div>
               <NavLink to="/cart/productdelivery">
                 <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 md:py-3 rounded font-medium mt-3 md:mt-4 text-sm md:text-base cursor-pointer">

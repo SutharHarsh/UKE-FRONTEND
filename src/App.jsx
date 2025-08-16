@@ -19,6 +19,8 @@ import AboutUs from "./Users/AboutUS/AboutUs";
 import ContactUs from "./Users/ContactUs/ContactUs";
 import ProductPage from "./Users/ProductPage/ProductPage";
 import ProductDelivery from "./Users/Cart/ProductDelivery";
+import PaymentInformationForm from "./components/Cart/PaymentInformationForm";
+import PaymentPage from "./Users/Cart/PaymentPage";
 
 function App() {
   return (
@@ -40,6 +42,7 @@ function App() {
               <Route path="/productpage/:id" element={<ProductPage />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/cart/productdelivery" element={<ProductDelivery />} />
+              <Route path="/cart/productdelivery/paymentinfo" element={<PaymentPage />} />
               {/* <Route path="/profile" element={<Profile />} /> */}
               {/* <Route element={<PrivateRoute />}></Route> */}
             </Route>
