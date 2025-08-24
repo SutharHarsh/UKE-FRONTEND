@@ -36,15 +36,15 @@ const PaymentPage = () => {
           </div>
         </div>
 
-        <div className="mx-auto w-full grid grid-cols-3 gap-8">
+        <div className="mx-auto w-full flex flex-col sm:flex-row gap-8 justify-center">
           {/* Payment Information */}
 
-          <div className="col-span-1">
+          <div className="sm:w-1/3">
             <PaymentInformationForm />
           </div>
 
           {/* Summary */}
-          <div className="bg-gray-900 col-span-2 rounded-lg p-6 border border-gray-800 h-fit">
+          <div className="bg-gray-900 sm:w-1/2  rounded-lg p-6 border border-gray-800 h-fit">
             <div className="">
               <Summary />
             </div>
