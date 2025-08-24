@@ -39,7 +39,6 @@ export const sendShippingData = async (orderData) => {
     }
 
     try {
-        // console.log("📦 Sending data:", JSON.stringify({ data: updatedData }, null, 2));
 
         const response = await fetch("https://uke-strapi.onrender.com/api/shippings", {
             method: "POST",
@@ -58,7 +57,6 @@ export const sendShippingData = async (orderData) => {
         }
 
         const data = await response.json();
-        console.log("✅ Order created:", data);
         return data;
 
     } catch (error) {

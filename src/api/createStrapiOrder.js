@@ -9,16 +9,11 @@ const createStrapiOrder = async ({
 } = {}) => {
     try {
 
-        // console.log(orderId);
-
         const shippingInfo = await fetch("https://uke-strapi.onrender.com/api/shippings");
         const shippingData = await shippingInfo.json();
 
         const shipping = shippingData.data.filter((item) => item.order_id == orderId);
-        console.log(shipping);
         const shipping_documentId = shipping[0].documentId;
-
-        console.log(shipping_documentId)
 
 
         // build orderItems from productData
@@ -48,7 +43,6 @@ const createStrapiOrder = async ({
         }
 
         const data = await response.json();
-        console.log("✅ Order created:", data);
         return data;
     } catch (error) {
         console.error("❌ Error creating order:", error.message);

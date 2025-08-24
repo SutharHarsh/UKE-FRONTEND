@@ -39,7 +39,6 @@ const Cart = () => {
 
   const handleClearPromo = () => {
     dispatch(clearPromoData());
-    console.log("I am clicked!");
     setPromoCode("");
   };
 
