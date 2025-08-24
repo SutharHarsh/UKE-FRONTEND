@@ -26,46 +26,46 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function App() {
   return (
-    <PayPalScriptProvider
-      options={{
-        "client-id":
-          "ASnlyxjGkQRwm81JkbB7-YiSgQC2NUIVaSwcocJK3sVQcfrvjwKkjG56hvJ7G2zSG4YIT3hQuhXcZwIO",
-        currency: "GBP",
-      }}
-    >
-      <Provider store={appStore}>
-        <AuthProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* Public Routes */}
-              <Route element={<PublicRoute />}>
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/signin" element={<SignIn />} />
-              </Route>
+    <Provider store={appStore}>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes */}
+            <Route element={<PublicRoute />}>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+            </Route>
 
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/productpage/:id" element={<ProductPage />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route
-                  path="/cart/productdelivery"
-                  element={<ProductDelivery />}
-                />
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/productpage/:id" element={<ProductPage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/cart/productdelivery"
+                element={<ProductDelivery />}
+              />
+              <PayPalScriptProvider
+                options={{
+                  "client-id":
+                    "ASnlyxjGkQRwm81JkbB7-YiSgQC2NUIVaSwcocJK3sVQcfrvjwKkjG56hvJ7G2zSG4YIT3hQuhXcZwIO",
+                  currency: "GBP",
+                }}
+              >
                 <Route
                   path="/cart/productdelivery/paymentinfo"
                   element={<PaymentPage />}
                 />
-                {/* <Route path="/profile" element={<Profile />} /> */}
-                {/* <Route element={<PrivateRoute />}></Route> */}
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
-      </Provider>
-    </PayPalScriptProvider>
+              </PayPalScriptProvider>
+              {/* <Route path="/profile" element={<Profile />} /> */}
+              {/* <Route element={<PrivateRoute />}></Route> */}
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </Provider>
   );
 }
 
