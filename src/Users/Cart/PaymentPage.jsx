@@ -70,7 +70,7 @@ const PaymentPage = () => {
             <PayPalButtons
               createOrder={async () => {
                 const res = await fetch(
-                  "http://localhost:5000/create-paypal-order",
+                  "https://uke-backend.vercel.app/create-paypal-order",
                   {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -111,7 +111,7 @@ const PaymentPage = () => {
 
                   // Finally capture the order
                   const res = await fetch(
-                    "http://localhost:5000/capture-paypal-order",
+                    "https://uke-backend.vercel.app/capture-paypal-order",
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
