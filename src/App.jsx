@@ -19,50 +19,50 @@ import AboutUs from "./Users/AboutUS/AboutUs";
 import ContactUs from "./Users/ContactUs/ContactUs";
 import ProductPage from "./Users/ProductPage/ProductPage";
 import ProductDelivery from "./Users/Cart/ProductDelivery";
-import PaymentInformationForm from "./components/Cart/PaymentInformationForm";
 import PaymentPage from "./Users/Cart/PaymentPage";
 
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function App() {
   return (
     <Provider store={appStore}>
       <AuthProvider>
         <BrowserRouter>
-          <Routes>
-            {/* Public Routes */}
-            <Route element={<PublicRoute />}>
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-            </Route>
+          {/* ✅ Wrap whole app with PayPal provider */}
+          <PayPalScriptProvider
+            options={{
+              "client-id":
+                "ASnlyxjGkQRwm81JkbB7-YiSgQC2NUIVaSwcocJK3sVQcfrvjwKkjG56hvJ7G2zSG4YIT3hQuhXcZwIO",
+              currency: "GBP",
+            }}
+          >
+            <Routes>
+              {/* Public Routes */}
+              <Route element={<PublicRoute />}>
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signin" element={<SignIn />} />
+              </Route>
 
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/productpage/:id" element={<ProductPage />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route
-                path="/cart/productdelivery"
-                element={<ProductDelivery />}
-              />
-              <PayPalScriptProvider
-                options={{
-                  "client-id":
-                    "ASnlyxjGkQRwm81JkbB7-YiSgQC2NUIVaSwcocJK3sVQcfrvjwKkjG56hvJ7G2zSG4YIT3hQuhXcZwIO",
-                  currency: "GBP",
-                }}
-              >
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/productpage/:id" element={<ProductPage />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route
+                  path="/cart/productdelivery"
+                  element={<ProductDelivery />}
+                />
                 <Route
                   path="/cart/productdelivery/paymentinfo"
                   element={<PaymentPage />}
                 />
-              </PayPalScriptProvider>
-              {/* <Route path="/profile" element={<Profile />} /> */}
-              {/* <Route element={<PrivateRoute />}></Route> */}
-            </Route>
-          </Routes>
+                {/* <Route path="/profile" element={<Profile />} /> */}
+                {/* <Route element={<PrivateRoute />}></Route> */}
+              </Route>
+            </Routes>
+          </PayPalScriptProvider>
         </BrowserRouter>
       </AuthProvider>
     </Provider>
