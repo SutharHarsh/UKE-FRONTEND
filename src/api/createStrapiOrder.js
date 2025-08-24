@@ -9,13 +9,16 @@ const createStrapiOrder = async ({
 } = {}) => {
     try {
 
-        console.log(orderId);
+        // console.log(orderId);
 
         const shippingInfo = await fetch("https://uke-strapi.onrender.com/api/shippings");
         const shippingData = await shippingInfo.json();
 
         const shipping = shippingData.data.filter((item) => item.order_id == orderId);
-        const shipping_documentId = shipping.documentId;
+        console.log(shipping);
+        const shipping_documentId = shipping[0].documentId;
+
+        console.log(shipping_documentId)
 
 
         // build orderItems from productData
@@ -35,11 +38,7 @@ const createStrapiOrder = async ({
                     cart_subtotal_price: cartSubTotal,
                     discount,
                     order_item: orderItems,
-                    shipping: [
-                        {
-                            id: shipping_documentId, // change if you want dynamic shipping
-                        },
-                    ],
+                    shipping: shipping_documentId,
                 },
             }),
         });
