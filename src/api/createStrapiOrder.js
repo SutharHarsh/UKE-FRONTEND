@@ -1,39 +1,60 @@
-import { useSelector } from "react-redux";
+// createStrapiOrder.js
 
-const createOrder = async ({ productData: productData,
-    cartSubTotal: cartSubTotal,
-    discount: discount,
-    finalPrice: finalPrice, }) => {
+const createStrapiOrder = async ({
+    productData,
+    cartSubTotal,
+    discount,
+    finalPrice,
+    orderId
+} = {}) => {
+    try {
 
-    const orderItems = productData.map((item) => (
-        {
+        console.log(orderId);
+
+        const shippingInfo = await fetch("https://uke-strapi.onrender.com/api/shippings");
+        const shippingData = shippingInfo.json();
+
+        const shipping = shippingData.filter((item) => item.order_id == orderId);
+        const shipping_documentId = shipping.documentId;
+
+
+        // build orderItems from productData
+        const orderItems = productData.map((item) => ({
             product: item.documentId,
-            quantity: item.quantity
-        }))
+            quantity: item.quantity,
+        }));
 
-    const response = await fetch("https://uke-strapi.onrender.com/api/orders", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            data: {
-                total_price: finalPrice,
-                cart_subtotal_price: cartSubTotal,
-                discount: discount,
-                order_item: orderItems,
-                shipping: [
-                    {
-                        id: 80,
-                    }
-                ]
+        const response = await fetch("https://uke-strapi.onrender.com/api/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-        }),
-    });
+            body: JSON.stringify({
+                data: {
+                    total_price: finalPrice,
+                    cart_subtotal_price: cartSubTotal,
+                    discount,
+                    order_item: orderItems,
+                    shipping: [
+                        {
+                            id: shipping_documentId, // change if you want dynamic shipping
+                        },
+                    ],
+                },
+            }),
+        });
 
-    const data = await response.json();
-    console.log(data);
-    return data;
+        if (!response.ok) {
+            throw new Error(`Failed to create order: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("✅ Order created:", data);
+        return data;
+    } catch (error) {
+        console.error("❌ Error creating order:", error.message);
+        return null;
+    }
 };
 
-export default createOrder;
+export default createStrapiOrder;

@@ -111,10 +111,11 @@ const PaymentPage = () => {
                   };
                   await sendShippingData(shippingDataWithOrderId);
                   await createStrapiOrder({
-                    productData: productData,
-                    cartSubTotal: cartSubTotal,
-                    discount: discount,
-                    finalPrice: finalPrice,
+                    productData,
+                    cartSubTotal,
+                    discount,
+                    finalPrice,
+                    orderId: data.orderID,
                   });
 
                   // Finally capture the order
