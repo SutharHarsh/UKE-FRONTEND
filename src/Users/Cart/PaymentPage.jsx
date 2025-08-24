@@ -105,7 +105,7 @@ const PaymentPage = () => {
                     orderId: data.orderID,
                   };
                   await sendShippingData(shippingDataWithOrderId);
-                  await createOrder();
+                  createOrder();
 
                   // Finally capture the order
                   const res = await fetch(
