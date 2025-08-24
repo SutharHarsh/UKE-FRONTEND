@@ -14,9 +14,6 @@ const PaymentPage = () => {
 
   const dispatch = useDispatch();
 
-  // createOrder();
-  // sendShippingData(formData);
-
   return (
     <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-6xl mx-auto">
@@ -108,6 +105,7 @@ const PaymentPage = () => {
                     orderId: data.orderID,
                   };
                   await sendShippingData(shippingDataWithOrderId);
+                  await createOrder();
 
                   // Finally capture the order
                   const res = await fetch(
