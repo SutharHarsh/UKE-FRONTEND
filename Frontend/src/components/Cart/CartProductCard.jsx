@@ -42,7 +42,7 @@ const CartProductCard = ({ data }) => {
         {/* Product Image */}
         <div className="bg-gray-800 rounded-lg p-2 sm:p-3 flex-shrink-0">
           <img
-            src={data?.images[0]?.url}
+            // src={data?.images[0]?.url}
             className="w-20 sm:w-24 md:w-28 h-auto object-contain"
             alt="product_image"
           />
