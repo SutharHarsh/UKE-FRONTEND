@@ -5,12 +5,17 @@ import { NavLink } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { sendShippingData } from "../../api/sendShippingData";
 import { updateShipping } from "../../store/shippingSlice";
-import createOrder from "../../api/createOrder";
+import createStrapiOrder from "../../api/createStrapiOrder";
 
 const PaymentPage = () => {
   const shippingType = useSelector((store) => store.shipping.shippingType);
-  const amount = useSelector((store) => store.delivery.finalPrice);
   const formData = useSelector((state) => state.shipping);
+
+  const { cartSubTotal, discount, finalPrice } = useSelector(
+    (store) => store.delivery
+  );
+  const productData = useSelector((store) => store.product.productData);
+  const {} = productData;
 
   const dispatch = useDispatch();
 
@@ -72,7 +77,7 @@ const PaymentPage = () => {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                      amount: amount, // optional: your data
+                      amount: finalPrice, // optional: your data
                     }),
                   }
                 );
@@ -105,7 +110,12 @@ const PaymentPage = () => {
                     orderId: data.orderID,
                   };
                   await sendShippingData(shippingDataWithOrderId);
-                  createOrder();
+                  await createStrapiOrder({
+                    productData: productData,
+                    cartSubTotal: cartSubTotal,
+                    discount: discount,
+                    finalPrice: finalPrice,
+                  });
 
                   // Finally capture the order
                   const res = await fetch(

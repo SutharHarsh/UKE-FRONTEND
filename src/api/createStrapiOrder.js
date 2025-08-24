@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
-const createOrder = async () => {
-
-    const { cartSubTotal, discount, finalPrice } = useSelector((store) => store.delivery);
-    const productData = useSelector((store) => store.product.productData)
+const createOrder = async ({ productData: productData,
+    cartSubTotal: cartSubTotal,
+    discount: discount,
+    finalPrice: finalPrice, }) => {
 
     const orderItems = productData.map((item) => (
         {
@@ -33,6 +33,7 @@ const createOrder = async () => {
 
     const data = await response.json();
     console.log(data);
+    return data;
 };
 
 export default createOrder;
