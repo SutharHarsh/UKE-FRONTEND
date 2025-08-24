@@ -14,7 +14,7 @@ const createStrapiOrder = async ({
         const shippingInfo = await fetch("https://uke-strapi.onrender.com/api/shippings");
         const shippingData = await shippingInfo.json();
 
-        const shipping = shippingData.filter((item) => item.order_id == orderId);
+        const shipping = shippingData.data.filter((item) => item.order_id == orderId);
         const shipping_documentId = shipping.documentId;
 
 
