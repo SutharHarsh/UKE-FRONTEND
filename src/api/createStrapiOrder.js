@@ -43,6 +43,8 @@ const createStrapiOrder = async ({
         }
 
         const data = await response.json();
+        console.log(data);
+        const documentId = data.data.documentId; 
         return data;
     } catch (error) {
         console.error("❌ Error creating order:", error.message);

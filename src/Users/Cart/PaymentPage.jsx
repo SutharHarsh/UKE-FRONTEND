@@ -110,7 +110,7 @@ const PaymentPage = () => {
                     orderId: data.orderID,
                   };
                   await sendShippingData(shippingDataWithOrderId);
-                  await createStrapiOrder({
+                  const strapiData = await createStrapiOrder({
                     productData,
                     cartSubTotal,
                     discount,
@@ -124,7 +124,10 @@ const PaymentPage = () => {
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ orderID: data.orderID }),
+                      body: JSON.stringify({
+                        orderID: data.orderID,
+                        documentId: strapiData.data.documentId,
+                      }),
                     }
                   );
 
