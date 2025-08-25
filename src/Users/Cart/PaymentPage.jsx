@@ -72,7 +72,7 @@ const PaymentPage = () => {
             <PayPalButtons
               createOrder={async () => {
                 const res = await fetch(
-                  "https://uke-backend.onrender.com/create-paypal-order",
+                  "https://uke-backend-jokk.onrender.com/create-paypal-order",
                   {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -120,7 +120,7 @@ const PaymentPage = () => {
 
                   // Finally capture the order
                   const res = await fetch(
-                    "https://uke-backend.onrender.com/capture-paypal-order",
+                    "https://uke-backend-jokk.onrender.com/capture-paypal-order",
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
