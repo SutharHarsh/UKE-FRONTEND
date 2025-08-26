@@ -53,14 +53,14 @@ const ProductDelivery = () => {
           <ShippingForm />
 
           <NavLink to="/cart">
-            <button className="bg-transparent border border-gray-600 text-white px-6 py-3 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer">
+            <button className="bg-transparent border border-gray-600 text-white px-6 py-3 mr-2 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer">
               Back to Cart
             </button>
           </NavLink>
 
           <button
             onClick={handleClearShippingInfo}
-            className="bg-transparent border border-gray-600 text-white px-6 mx-6 py-3 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer"
+            className="bg-transparent border border-gray-600 text-white px-6 mt-2 sm:mx-6 py-3 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer"
           >
             Clear Shipping Information
           </button>

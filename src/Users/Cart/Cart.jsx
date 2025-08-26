@@ -43,11 +43,22 @@ const Cart = () => {
     setPromoCode("");
   };
 
+  // ✅ FIX: Always update Redux totals when cart changes
+  useEffect(() => {
+    dispatch(
+      addCartData({
+        cartSubTotal: totalPrice,
+        discount,
+        finalPrice: totalPrice - discount + shipping,
+        promoCodeStore,
+      })
+    );
+  }, [dispatch, totalPrice, discount, shipping, promoCodeStore]);
+
   return (
     <div className="min-h-screen bg-black my-20 text-white">
       {/* Header Navigation */}
-      <Stepper activeStep="My Cart"/>
-      
+      <Stepper activeStep="My Cart" />
 
       <div className="max-w-7xl mx-auto p-4 md:p-6">
         {/* Product Table Header */}

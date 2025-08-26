@@ -19,7 +19,7 @@ const Summary = () => {
       </div>
 
       {/* Totals */}
-      <div className="border-t border-gray-600 pt-4 mt-4 space-y-2">
+      <div className="space-y-2">
         <div className="flex justify-between">
           <span>Cart Sub Total:</span>
           <span className="text-green-400">£{cartSubTotal}</span>
