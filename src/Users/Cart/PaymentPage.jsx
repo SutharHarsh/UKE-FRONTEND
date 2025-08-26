@@ -138,7 +138,7 @@ const PaymentPage = () => {
                       "Transaction completed by " +
                         (formData.firstName || "Unknown Buyer")
                     );
-                    <Navigate to="https://uke-frontend.vercel.app/cart/productdelivery/paymentinfo/paymentconfirmation" />;
+                    <Navigate to="/cart/productdelivery/paymentinfo/paymentconfirmation" />;
                   } catch (error) {
                     console.error("Payment process failed:", error);
                     alert("Payment process failed. Please try again.");
