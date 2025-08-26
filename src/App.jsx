@@ -22,6 +22,7 @@ import ProductDelivery from "./Users/Cart/ProductDelivery";
 import PaymentPage from "./Users/Cart/PaymentPage";
 
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import OrderConfirmation from "./Users/Cart/OrderConfirmation";
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
                 <Route
                   path="/cart/productdelivery/paymentinfo"
                   element={<PaymentPage />}
+                />
+                <Route
+                  path="/cart/productdelivery/paymentinfo/paymentconfirmation"
+                  element={<OrderConfirmation />}
                 />
                 {/* <Route path="/profile" element={<Profile />} /> */}
                 {/* <Route element={<PrivateRoute />}></Route> */}

@@ -3,6 +3,7 @@ import CartProductCard from "../../components/Cart/CartProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addCartData, clearPromoData } from "../../store/deliverySlice";
+import Stepper from "../../components/ui/Stepper";
 
 const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
@@ -45,22 +46,8 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-black my-20 text-white">
       {/* Header Navigation */}
-      <div className="flex items-center justify-center py-4 md:py-6 border-b border-gray-700 px-4">
-        <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 overflow-x-auto">
-          <div className="bg-red-600 px-3 sm:px-4 md:px-6 py-2 rounded-full text-white font-medium text-sm md:text-base whitespace-nowrap">
-            My Cart
-          </div>
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            Delivery
-          </div>
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            Payment
-          </div>
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            Confirmation
-          </div>
-        </div>
-      </div>
+      <Stepper activeStep="My Cart"/>
+      
 
       <div className="max-w-7xl mx-auto p-4 md:p-6">
         {/* Product Table Header */}

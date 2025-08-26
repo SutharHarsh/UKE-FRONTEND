@@ -6,6 +6,7 @@ import Summary from "../../components/Cart/Summary";
 import ShippingForm from "../../components/Cart/ShippingForm";
 import { clearShipping, updateShipping } from "../../store/shippingSlice";
 import useShippingData from "../../Hooks/useShippingData";
+import Stepper from "../../components/ui/Stepper";
 
 const ProductDelivery = () => {
   const dispatch = useDispatch();
@@ -19,49 +20,44 @@ const ProductDelivery = () => {
   };
 
   const handleCheckOut = () => {
-    dispatch(updateShipping({ shippingType: formData.shippingType })); // ✅ wrap in object
+    dispatch(updateShipping({ shippingType: formData.shippingType }));
   };
 
   const handleInputChange = (field, value) => {
     dispatch(updateShipping({ [field]: value }));
   };
 
+  // ✅ Validation Function
+  const isFormValid = () => {
+    return (
+      formData.firstName?.trim() &&
+      formData.lastName?.trim() &&
+      formData.address?.trim() &&
+      formData.zipCode?.trim() &&
+      formData.country?.trim() &&
+      formData.city?.trim() &&
+      formData.state?.trim() &&
+      formData.cellPhone?.trim() &&
+      formData.deliveryTime?.trim() &&
+      formData.shippingType?.trim()
+    );
+  };
+
   return (
     <div className="min-h-screen bg-black my-20 text-white p-4">
-      {/* Header Navigation */}
-      <div className="flex items-center justify-center py-4 md:py-6 border-b border-gray-700 px-4">
-        <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 overflow-x-auto">
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            My Cart
-          </div>
-          <div className="bg-orange-400 px-3 sm:px-4 md:px-6 py-2 rounded-full text-white font-medium text-sm md:text-base whitespace-nowrap">
-            Delivery
-          </div>
-
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            Payment
-          </div>
-          <div className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-            Confirmation
-          </div>
-        </div>
-      </div>
+      <Stepper activeStep="Delivery" />
 
       <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-8 my-10">
-        {/* Left Section - Shipping Information */}
+        {/* Left Section */}
         <div className="lg:col-span-2 space-y-6">
-          <ShippingForm
-            onChange={(data) => console.log("Form updated:", data)}
-          />
+          <ShippingForm />
 
-          {/* Back to Cart Button */}
           <NavLink to="/cart">
             <button className="bg-transparent border border-gray-600 text-white px-6 py-3 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer">
               Back to Cart
             </button>
           </NavLink>
 
-          {/* Clear Shipping Information */}
           <button
             onClick={handleClearShippingInfo}
             className="bg-transparent border border-gray-600 text-white px-6 mx-6 py-3 rounded-lg hover:border-yellow-400 transition-colors cursor-pointer"
@@ -70,17 +66,15 @@ const ProductDelivery = () => {
           </button>
         </div>
 
-        {/* Right Section - Summary and Shipping */}
+        {/* Right Section */}
         <div className="space-y-6">
-          {/* Summary */}
           <Summary />
 
           {/* Shipping Options */}
           <div className="bg-gray-800 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold">Shipping</h3>
-            </div>
+            <h3 className="text-xl font-bold mb-4">Shipping</h3>
 
+            {/* Standard Shipping */}
             <div className="space-y-4">
               <label className="flex items-start space-x-3 cursor-pointer">
                 <input
@@ -123,11 +117,19 @@ const ProductDelivery = () => {
               </label>
             </div>
 
-            {/* Check Out Button */}
-            <NavLink to="/cart/productdelivery/paymentinfo">
+            {/* ✅ Checkout Button (disabled until form is valid) */}
+            <NavLink
+              to={isFormValid() ? "/cart/productdelivery/paymentinfo" : "#"}
+            >
               <button
-                onClick={handleCheckOut}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg mt-6 flex items-center justify-center space-x-2 transition-colors cursor-pointer"
+                onClick={isFormValid() ? handleCheckOut : null}
+                disabled={!isFormValid()}
+                className={`w-full mt-6 py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-colors cursor-pointer 
+                  ${
+                    isFormValid()
+                      ? "bg-green-500 hover:bg-green-600 text-white font-semibold"
+                      : "bg-gray-600 text-gray-300 cursor-not-allowed"
+                  }`}
               >
                 <span>Check Out</span>
                 <ArrowRight size={20} />
