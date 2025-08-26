@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 const OrderConfirmation = () => {
   const shippingType = useSelector((state) => state.shipping.shippingType);
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="min-h-screen  text-white p-6">
       {/* Progress Bar Placeholder */}
       <div className="mb-8">
         <Stepper activeStep="Confirmation" />
