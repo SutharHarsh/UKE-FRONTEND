@@ -1,7 +1,7 @@
 import PaymentInformationForm from "../../components/Cart/PaymentInformationForm";
 import Summary from "../../components/Cart/Summary";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { sendShippingData } from "../../api/sendShippingData";
 import { updateShipping } from "../../store/shippingSlice";
@@ -12,6 +12,8 @@ const PaymentPage = () => {
   const formData = useSelector((state) => state.shipping);
   const shippingType = formData.shippingType;
   const email = formData.email;
+
+  const navigate = useNavigate();
 
   const { cartSubTotal, discount, finalPrice } = useSelector(
     (store) => store.delivery
@@ -138,7 +140,7 @@ const PaymentPage = () => {
                       "Transaction completed by " +
                         (formData.firstName || "Unknown Buyer")
                     );
-                    <Navigate to="/cart/productdelivery/paymentinfo/paymentconfirmation" />;
+                    navigate("/cart/productdelivery/paymentinfo/paymentconfirmation");
                   } catch (error) {
                     console.error("Payment process failed:", error);
                     alert("Payment process failed. Please try again.");
