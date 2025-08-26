@@ -18,12 +18,12 @@ export default function ProductCard({
 }) {
   
   const handleBuyNow = () => {
-    console.log('Buy Now clicked for product:', product.id);
+    // console.log('Buy Now clicked for product:', product.id);
     // Add your buy now logic here
   };
 
   const handleAddToCart = () => {
-    console.log('Add to Cart clicked for product:', product.id);
+    // console.log('Add to Cart clicked for product:', product.id);
     // Add your add to cart logic here
   };
 
@@ -31,37 +31,7 @@ export default function ProductCard({
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group max-w-sm">
       
       {/* Product Image */}
-      <div className="relative bg-gray-50 p-8 overflow-hidden">
-        {/* Discount Badge */}
-        {product.discount && (
-          <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
-            -{product.discount}%
-          </div>
-        )}
-        
-        {/* Stock Status */}
-        <div className="absolute top-4 right-4 z-10">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-            product.inStock 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-red-100 text-red-800'
-          }`}>
-            {product.inStock ? 'In Stock' : 'Out of Stock'}
-          </span>
-        </div>
-
-        {/* Product Image */}
-        <div className="relative h-48 flex items-center justify-center">
-          <img 
-            src={product.image} 
-            alt={product.name}
-            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23f3f4f6'/%3E%3Ctext x='100' y='75' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='14'%3E%3Ctspan x='100' y='70'%3EProduct%3C/tspan%3E%3Ctspan x='100' y='85'%3EImage%3C/tspan%3E%3C/text%3E%3C/svg%3E";
-            }}
-          />
-        </div>
-      </div>
+      
 
       {/* Product Info */}
       <div className="p-6 space-y-4">

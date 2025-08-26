@@ -22,8 +22,6 @@ const Home = () => {
 
   const { products, loading, error } = useProducts();
 
-  // console.log(products)
-
   const FilterSection = () => (
     <div className="space-y-6 md:space-y-8">
       {/* Filter Header */}
@@ -202,6 +200,10 @@ const Home = () => {
       </div>
     </div>
   );
+
+  if (loading) return <h1 className="m-10">Loading...</h1>;
+
+  if (error) return <h1>{error}</h1>
 
   return (
     <div className="flex flex-col">

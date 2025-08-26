@@ -3,7 +3,6 @@ import { updateCartQuantity, removeFromCart } from "../../store/productSlice";
 import { Trash2, Plus, Minus } from "lucide-react";
 
 const CartProductCard = ({ data }) => {
-  console.log(data)
   const dispatch = useDispatch();
 
   const addQuantity = () => {

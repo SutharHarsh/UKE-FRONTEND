@@ -7,6 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const OrderConfirmation = () => {
   const shippingType = useSelector((state) => state.shipping.shippingType);
+  const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL;
   return (
     <div className="min-h-screen  text-white p-6">
       {/* Progress Bar Placeholder */}
@@ -38,7 +39,7 @@ const OrderConfirmation = () => {
 
           {/* Action Button */}
           <div className="pt-4">
-            <Link to="https://uke-frontend.vercel.app/home">
+            <Link to={FRONTEND_URL}>
               <button className="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 w-full max-w-xs">
                 Back to Home Page
               </button>

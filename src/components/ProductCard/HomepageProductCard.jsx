@@ -2,10 +2,8 @@ import { ShoppingCart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../store/productSlice";
 
-const HomepageProductCard = ({ product }) => {
+const HomepageProductCard = ({ product, where }) => {
   const dispatch = useDispatch();
-
-  console.log(product)
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -65,21 +63,28 @@ const HomepageProductCard = ({ product }) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-3 mt-6">
-        {/* Buy Now Button */}
-        <button className="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">
-          Buy Now
-        </button>
 
-        {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          className="flex-1 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-        >
-          <ShoppingCart size={16} />
-          Add to Cart
+      {where ? (
+        <button className="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2.5 rounded-lg transition-colors duration-200 cursor-pointer px-8 mt-6">
+          View Now
         </button>
-      </div>
+      ) : (
+        <div className="flex gap-3 mt-6">
+          <button className="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">
+            Buy Now
+          </button>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className="flex-1 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <ShoppingCart size={16} />
+            Add to Cart
+          </button>
+        </div>
+      )}
+      {/* Buy Now Button */}
     </div>
   );
 };

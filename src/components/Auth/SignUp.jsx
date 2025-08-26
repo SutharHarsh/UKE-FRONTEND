@@ -21,7 +21,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        "https://uke-strapi-backend.onrender.com/api/users",
+        "",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -1,8 +1,3 @@
-// src/api/orders.js
-import axios from "axios";
-
-const API_URL = "https://uke-strapi.onrender.com/api/shippings"; // change to your strapi url
-
 // Function to create an order
 export const sendShippingData = async (orderData) => {
     const {
@@ -40,7 +35,9 @@ export const sendShippingData = async (orderData) => {
 
     try {
 
-        const response = await fetch("https://uke-strapi.onrender.com/api/shippings", {
+        const STRAPI_API = import.meta.env.VITE_STRAPI_URL;
+
+        const response = await fetch(STRAPI_API + "/api/shippings", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

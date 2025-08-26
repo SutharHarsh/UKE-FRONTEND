@@ -22,6 +22,8 @@ const PaymentPage = () => {
 
   const dispatch = useDispatch();
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   return (
     <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-6xl mx-auto">
@@ -68,7 +70,7 @@ const PaymentPage = () => {
                   }
 
                   const res = await fetch(
-                    "https://uke-backend-jokk.onrender.com/create-paypal-order",
+                    BACKEND_URL + "/create-paypal-order",
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
@@ -101,7 +103,9 @@ const PaymentPage = () => {
                       ...formData,
                       orderId: data.orderID,
                     };
-                    await sendShippingData(shippingDataWithOrderId);
+                    const shippingData = await sendShippingData(
+                      shippingDataWithOrderId
+                    );
 
                     const strapiData = await createStrapiOrder({
                       productData,
@@ -112,13 +116,14 @@ const PaymentPage = () => {
                     });
 
                     const res = await fetch(
-                      "https://uke-backend-jokk.onrender.com/capture-paypal-order",
+                      BACKEND_URL + "/capture-paypal-order",
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                           orderID: data.orderID,
                           documentId: strapiData.data.documentId,
+                          shippingDocumentId: shippingData.data.documentId,
                         }),
                       }
                     );
@@ -134,13 +139,14 @@ const PaymentPage = () => {
                     }
 
                     const details = await res.json();
-                    console.log("PayPal capture details:", details);
 
                     alert(
                       "Transaction completed by " +
                         (formData.firstName || "Unknown Buyer")
                     );
-                    navigate("/cart/productdelivery/paymentinfo/paymentconfirmation");
+                    navigate(
+                      "/cart/productdelivery/paymentinfo/paymentconfirmation"
+                    );
                   } catch (error) {
                     console.error("Payment process failed:", error);
                     alert("Payment process failed. Please try again.");

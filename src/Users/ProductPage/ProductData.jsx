@@ -12,6 +12,7 @@ import { useProduct } from "../../Hooks/Product";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../store/productSlice";
+import ReactMarkdown from "react-markdown";
 
 const ProductData = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
@@ -19,9 +20,7 @@ const ProductData = ({ productId }) => {
   const dispatch = useDispatch();
 
   const productData = useProduct(productId);
-  // console.log(productData)
   const product = productData?.product?.data;
-  console.log(product);
 
   const handleQuantityChange = (action) => {
     if (action === "increment") {
@@ -32,7 +31,7 @@ const ProductData = ({ productId }) => {
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product?.name} to cart`);
+    dispatch(addProductToCart(product));
   };
 
   const handleBuyNow = () => {
@@ -45,11 +44,7 @@ const ProductData = ({ productId }) => {
         <div className="grid lg:grid-cols-2 gap-12 ">
           {/* Product Images */}
           <div>
-            <img
-              className="rounded-lg"
-              src={"https://uke-strapi.onrender.com" + product?.images[0]?.url}
-              alt=""
-            />
+            <img className="rounded-lg" src={product?.images[0]?.url} alt="" />
           </div>
 
           {/* Product Details */}
@@ -161,8 +156,34 @@ const ProductData = ({ productId }) => {
           <div className="py-8">
             {activeTab === "information" && (
               <div className="mt-8">
-                <p className="text-gray-300 leading-relaxed">
-                  {product?.description}
+                <p className="text-gray-300 prose prose-invert leading-relaxed">
+                  <ReactMarkdown
+                    components={{
+                      h1: ({ node, ...props }) => (
+                        <h1
+                          className="text-2xl font-bold mt-4 mb-2"
+                          {...props}
+                        />
+                      ),
+                      h2: ({ node, ...props }) => (
+                        <h2
+                          className="text-xl font-semibold mt-3 mb-2"
+                          {...props}
+                        />
+                      ),
+                      ul: ({ node, ...props }) => (
+                        <ul className="list-disc ml-6 space-y-1" {...props} />
+                      ),
+                      li: ({ node, ...props }) => (
+                        <li className="text-gray-300" {...props} />
+                      ),
+                      p: ({ node, ...props }) => (
+                        <p className="mb-3" {...props} />
+                      ),
+                    }}
+                  >
+                    {product?.description}
+                  </ReactMarkdown>
                 </p>
               </div>
             )}

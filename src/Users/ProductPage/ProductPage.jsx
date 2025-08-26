@@ -4,7 +4,6 @@ import YouMayAlsoLikeSection from "./YouMayAlsoLikeSection";
 
 const ProductPage = () => {
   const productData = useParams();
-  console.log(productData)
   return (
     <>
       <ProductData productId={productData.id} />

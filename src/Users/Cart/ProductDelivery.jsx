@@ -16,7 +16,6 @@ const ProductDelivery = () => {
 
   const handleClearShippingInfo = () => {
     dispatch(clearShipping());
-    console.log(data);
   };
 
   const handleCheckOut = () => {

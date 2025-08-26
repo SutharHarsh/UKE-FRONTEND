@@ -1,6 +1,9 @@
 // hooks/useProducts.js
 import { useState, useEffect } from 'react';
 
+const STRAPI_API = import.meta.env.VITE_STRAPI_URL;
+
+
 export const useProducts = (options = {}) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,10 +41,8 @@ export const useProducts = (options = {}) => {
       if (sortBy) params.append('sortBy', sortBy);
       if (sortOrder) params.append('sortOrder', sortOrder);
 
-      const queryString = params.toString();
-      console.log(queryString);
-      // const url = `http://localhost:1337/api/products?limit=10&sortBy=name&sortOrder=asc`;
-      const url = `https://uke-strapi.onrender.com/api/products?populate=*`;
+      // const queryString = params.toString();
+      const url = STRAPI_API + `/api/products?populate=*`;
 
       const response = await fetch(url, {
         method: 'GET',
@@ -113,7 +114,7 @@ export const useProduct = (productId) => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`https://uke-strapi.onrender.com/api/products/${productId}?populate=*`, {
+      const response = await fetch(STRAPI_API + `/api/products/${productId}?populate=*`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

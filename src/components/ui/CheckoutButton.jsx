@@ -17,7 +17,6 @@ const CheckoutButton = () => {
           label: "paypal",
         }}
         createOrder={(data, actions) => {
-          console.log(data);
           return actions.order.create({
             purchase_units: [
               {
