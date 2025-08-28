@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomepageProductCard from "../../components/ProductCard/HomepageProductCard";
 import { useProducts } from "../../Hooks/Product";
 import { SlidersHorizontal, X, Filter } from "lucide-react";
 import PriceRangeSlider from "./PriceRangeSlider";
 import HeroSection from "../../assets/HeroSection.png";
 import { Link } from "react-router-dom";
+import useTags from "../../Hooks/useTags";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const Home = () => {
-  const [selectedCamera, setSelectedCamera] = useState("Rounded CCTV Camera");
-  const [selectedSpecs, setSelectedSpecs] = useState(["Night Vision Camera"]);
+  const [selectedCamera, setSelectedCamera] = useState([]);
   const [selectedPage, setSelectedPage] = useState(5);
-  const [priceRange, setPriceRange] = useState([150, 500]);
+  const [priceRange, setPriceRange] = useState([0, 1000]); // [min, max]
   const [selectedStock, setSelectedStock] = useState("Available in Stock");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(10);
+  const [tags, setTags] = useState([]);
 
-  const handleSpecToggle = (spec) => {
-    setSelectedSpecs((prev) =>
-      prev.includes(spec) ? prev.filter((s) => s !== spec) : [...prev, spec]
+  const handleCameraToggle = (tagName) => {
+    setSelectedCamera(
+      (prev) =>
+        prev.includes(tagName)
+          ? prev.filter((item) => item !== tagName) // remove if already selected
+          : [...prev, tagName] // add if not selected
     );
   };
 
   const { products, loading, error } = useProducts();
+
+  const fetchTags = async () => {
+    const tags = await useTags();
+    setTags(tags);
+  };
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
+
+  const handleClearTags = () => {
+    setSelectedCamera([]);
+  };
 
   const FilterSection = () => (
     <div className="space-y-6 md:space-y-8">
@@ -46,48 +66,55 @@ const Home = () => {
           Categories
         </h1>
         <div className="bg-white backdrop-blur-sm border border-white/20 rounded-2xl p-4 md:p-6 shadow-lg">
-          <div className="space-y-3 md:space-y-4">
-            {["Rounded CCTV Camera", "Squared CCTV Camera", "CCTV Camera"].map(
-              (camera, index) => (
+          <div className="space-y-3 md:space-y-4 h-50 overflow-y-scroll">
+            {tags.data &&
+              tags.data.map((tag) => (
                 <label
-                  key={index}
+                  key={tag.documentId}
                   className="flex items-center space-x-3 cursor-pointer"
                 >
                   <div className="relative">
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="camera"
-                      value={camera}
-                      checked={selectedCamera === camera}
-                      onChange={(e) => setSelectedCamera(e.target.value)}
+                      value={tag.name}
+                      checked={selectedCamera.includes(tag.name)}
+                      onChange={() => handleCameraToggle(tag.name)}
                       className="sr-only"
                     />
                     <div
-                      className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 ${
-                        selectedCamera === camera
+                      className={`w-4 h-4 md:w-5 md:h-5 rounded-md border-2 flex items-center justify-center ${
+                        selectedCamera.includes(tag.name)
                           ? "bg-emerald-500 border-emerald-500"
                           : "bg-gray-300 border-gray-300"
                       }`}
                     >
-                      {selectedCamera === camera && (
-                        <div className="w-full h-full rounded-full bg-emerald-500"></div>
+                      {selectedCamera.includes(tag.name) && (
+                        <div className="w-2 h-2 md:w-3 md:h-3 bg-emerald-500 rounded-sm"></div>
                       )}
                     </div>
                   </div>
                   <span className="text-black font-medium text-sm md:text-base">
-                    {camera}
+                    {tag.name}
                   </span>
                 </label>
-              )
-            )}
+              ))}
+          </div>
+          <div>
+            <button
+              onClick={handleClearTags}
+              className="bg-emerald-500 px-6 text-lg py-1 rounded-lg mt-4 cursor-pointer hover:bg-emerald-600"
+            >
+              Clear
+            </button>
           </div>
         </div>
       </div>
 
-      <hr className="border-white/30 border-t-2" />
+      {/* <hr className="border-white/30 border-t-2" /> */}
 
       {/* Specifications Filter */}
-      <div>
+      {/* <div>
         <h1 className="text-lg md:text-xl font-bold mb-3 text-white">
           Sub Categories
         </h1>
@@ -140,7 +167,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <hr className="border-white/30 border-t-2" />
 
@@ -171,7 +198,7 @@ const Home = () => {
       <hr className="border-white/30 border-t-2" />
 
       {/* Price Range Chart */}
-      <PriceRangeSlider />
+      <PriceRangeSlider priceRange={priceRange} onChange={setPriceRange} />
 
       <hr className="border-white/30 border-t-2" />
 
@@ -201,9 +228,33 @@ const Home = () => {
     </div>
   );
 
-  if (loading) return <h1 className="m-10">Loading...</h1>;
+  const filteredProducts = products.filter((product) => {
+    const name = product?.name?.toLowerCase() || "";
+    const description = product?.description?.toLowerCase() || "";
+    const query = searchQuery.toLowerCase();
+    const price = product?.price || 0;
 
-  if (error) return <h1>{error}</h1>
+    // 1. Search filter
+    const matchesSearch = name.includes(query) || description.includes(query);
+
+    // 2. Tag filter (AND condition: product must have all selected tags)
+    const matchesTags =
+      selectedCamera.length === 0 ||
+      selectedCamera.every((selectedTag) =>
+        product.tags.some((tag) => tag.name === selectedTag)
+      );
+
+    // 3. Price filter
+    const matchesPrice = price >= priceRange[0] && price <= priceRange[1];
+
+    return matchesSearch && matchesTags && matchesPrice;
+  });
+
+  const visibleProducts = filteredProducts.slice(0, visibleCount);
+
+  // if (loading) return <LoadingSpinner />;
+
+  if (error) return <h1>{error}</h1>;
 
   return (
     <div className="flex flex-col">
@@ -253,17 +304,54 @@ const Home = () => {
           </div>
 
           {/* Product Grid - Centered layout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center">
-            {products.map((product) => (
-              <div
-                key={product.documentId}
-                className="w-full max-w-sm flex justify-center"
-              >
-                <Link to={"/productpage/" + product?.documentId}>
-                  <HomepageProductCard product={product} />
-                </Link>
+          <div>
+            <div>
+              {/* Search Bar */}
+              <div className="w-full max-w-2xl mb-6 flex justify-center">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm md:text-base"
+                />
               </div>
-            ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center">
+              {visibleProducts.length > 0 ? (
+                loading ? (
+                  <LoadingSpinner />
+                ) : (
+                  visibleProducts.map((product) => (
+                    <div
+                      key={product.documentId}
+                      className="w-full max-w-sm flex justify-center"
+                    >
+                      <Link to={`/productpage/${product.documentId}`}>
+                        <HomepageProductCard product={product} />
+                      </Link>
+                    </div>
+                  ))
+                )
+              ) : (
+                <p className="col-span-full text-center text-gray-500 text-lg font-medium">
+                  No products found.
+                </p>
+              )}
+            </div>
+
+            <div>
+              {filteredProducts.length > visibleCount && (
+                <div className="mt-8 flex justify-center">
+                  <button
+                    onClick={() => setVisibleCount((prev) => prev + 10)}
+                    className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all duration-200"
+                  >
+                    Show More
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

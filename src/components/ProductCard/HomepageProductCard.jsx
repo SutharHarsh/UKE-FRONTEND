@@ -1,13 +1,16 @@
 import { ShoppingCart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../store/productSlice";
+import { useNotification } from "../ui/NotificationContext";
 
 const HomepageProductCard = ({ product, where }) => {
   const dispatch = useDispatch();
+  const { notify } = useNotification();
 
   const handleAddToCart = (e) => {
     e.preventDefault();
     dispatch(addProductToCart(product));
+    notify("Item added to cart!", "success");
   };
 
   return (
@@ -26,7 +29,7 @@ const HomepageProductCard = ({ product, where }) => {
         {/* Product Model No */}
         <div>
           <span className="text-xs text-gray-400 font-medium">
-            Product Name:{" "}
+            Model Number:{" "}
           </span>
           <span className="text-xs text-white">
             {product?.model_no || "DS-2CD2H23G2-IZS"}
@@ -46,7 +49,7 @@ const HomepageProductCard = ({ product, where }) => {
         <div>
           <span className="text-xs text-gray-400 font-medium">Price: </span>
           <span className="text-lg text-white font-bold">
-            {product?.price || "$147.51"}
+            £{product?.price || "$147.51"}
           </span>
         </div>
 

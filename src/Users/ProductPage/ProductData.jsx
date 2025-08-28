@@ -13,11 +13,13 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../store/productSlice";
 import ReactMarkdown from "react-markdown";
+import { useNotification } from "../../components/ui/NotificationContext";
 
 const ProductData = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("information");
   const dispatch = useDispatch();
+  const { notify } = useNotification();
 
   const productData = useProduct(productId);
   const product = productData?.product?.data;
@@ -32,6 +34,7 @@ const ProductData = ({ productId }) => {
 
   const handleAddToCart = () => {
     dispatch(addProductToCart(product));
+    notify("Item added to cart!", "success");
   };
 
   const handleBuyNow = () => {
@@ -53,11 +56,16 @@ const ProductData = ({ productId }) => {
               <p className="text-green-400 text-sm font-medium">
                 {/* {product.category} */}
               </p>
+              <h1 className="mt-2 text-gray-400">
+                <span className="text-lg pr-2">Model No.</span>
+                <span className="text-lg font-bold">{product?.model_no}</span>
+              </h1>
+
               <h1 className="text-2xl mt-2">Product Name</h1>
               <h1 className="text-3xl font-bold mt-2">{product?.name}</h1>
 
               {/* Rating */}
-              <div className="flex items-center mt-3">
+              {/* <div className="flex items-center mt-3">
                 <div className="flex space-x-1">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -69,7 +77,7 @@ const ProductData = ({ productId }) => {
                 <span className="ml-2 text-sm text-gray-400">
                   {product?.reviews} Reviews
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* Price */}

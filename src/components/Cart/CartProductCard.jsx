@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { updateCartQuantity, removeFromCart } from "../../store/productSlice";
 import { Trash2, Plus, Minus } from "lucide-react";
+import { useNotification } from "../ui/NotificationContext";
 
 const CartProductCard = ({ data }) => {
   const dispatch = useDispatch();
+  const { notify } = useNotification();
 
   const addQuantity = () => {
     dispatch(updateCartQuantity({ id: data.id, quantity: data.quantity + 1 }));
@@ -19,6 +21,7 @@ const CartProductCard = ({ data }) => {
 
   const removeItem = (id) => {
     dispatch(removeFromCart(id));
+    notify("Item removed from cart!", "success");
   };
 
   return (

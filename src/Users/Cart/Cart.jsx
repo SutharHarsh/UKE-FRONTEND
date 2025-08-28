@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addCartData, clearPromoData } from "../../store/deliverySlice";
 import Stepper from "../../components/ui/Stepper";
+import { useNotification } from "../../components/ui/NotificationContext";
 
 const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
 
   const dispatch = useDispatch();
+  const { notify } = useNotification();
 
   // Get data from Redux (already persisted from localStorage)
   const { productData, totalPrice } = useSelector((store) => store.product);
@@ -36,6 +38,7 @@ const Cart = () => {
         promoCodeStore: upperCode,
       })
     );
+    notify("Promo Code Applied", "success");
   };
 
   const handleClearPromo = () => {
