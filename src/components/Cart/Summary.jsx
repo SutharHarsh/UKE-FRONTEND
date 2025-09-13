@@ -34,7 +34,7 @@ const Summary = () => {
         </div>
         <div className="flex justify-between font-bold text-lg border-t border-gray-600 pt-2">
           <span>Cart Total:</span>
-          <span className="text-green-400">£{finalPrice}</span>
+          <span className="text-green-400">£{finalPrice.toFixed(2)}</span>
         </div>
       </div>
     </div>
