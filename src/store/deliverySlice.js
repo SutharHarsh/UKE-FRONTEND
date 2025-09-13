@@ -30,7 +30,8 @@ const deliverySlice = createSlice({
         clearPromoData: (state) => {
             state.promoCodeStore = "";
             state.discount = 0;
-            state.finalPrice = state.cartSubTotal - state.discount;
+            const temp_price = state.cartSubTotal - state.discount;
+            state.finalPrice = temp_price.toFixed(2);
 
             localStorage.setItem("deliveryState", JSON.stringify(state));
         }
