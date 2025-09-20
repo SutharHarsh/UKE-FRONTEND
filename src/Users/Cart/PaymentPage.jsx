@@ -69,6 +69,8 @@ const PaymentPage = () => {
                     throw new Error("Email missing");
                   }
 
+                  finalPrice = Number(finalPrice).toFixed(2);
+
                   const res = await fetch(
                     BACKEND_URL + "/create-paypal-order",
                     {
