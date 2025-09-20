@@ -41,6 +41,7 @@ const createStrapiOrder = async ({
         });
 
         if (!response.ok) {
+            console.error("Order creation failed:", errorText);
             throw new Error(`Failed to create order: ${response.status}`);
         }
 
