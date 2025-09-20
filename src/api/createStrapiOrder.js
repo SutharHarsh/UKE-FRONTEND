@@ -33,7 +33,7 @@ const createStrapiOrder = async ({
                 data: {
                     total_price: finalPrice,
                     cart_subtotal_price: cartSubTotal,
-                    discount,
+                    discount: discount,
                     order_item: orderItems,
                     shipping: shipping_documentId,
                 },
